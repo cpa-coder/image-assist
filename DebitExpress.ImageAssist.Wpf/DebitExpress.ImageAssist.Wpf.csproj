@@ -14,5 +14,13 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>image netcore c#</PackageTags>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DocumentationFile>bin\Release\DebitExpress.ImageAssist.Wpf.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
   
 </Project>
