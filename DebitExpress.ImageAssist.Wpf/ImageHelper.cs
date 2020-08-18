@@ -131,5 +131,19 @@ namespace DebitExpress.ImageAssist.Wpf
             bitmap?.Save(ms, jpgInfo, encParams);
             return ms.ToArray();
         }
+        
+        /// <summary>
+        /// Creates an <see cref="Image"/> from the specified file.
+        /// </summary>
+        /// <param name="imagePath"></param>
+        /// <returns></returns>
+        public static Image FromFile(string imagePath)
+        {
+            var bytes = File.ReadAllBytes(imagePath);
+            using var stream = new MemoryStream(bytes);
+            {
+                return Image.FromStream(stream);
+            }
+        }
     }
 }
