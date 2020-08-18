@@ -1,7 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>8</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>DebitExpress.ImageAssist.Wpf</Title>
+    <Authors>Ogie Galicia</Authors>
+    <Description>This is a collection of useful modules for managing images in a WPF application.</Description>
+    <Copyright>DebitExpress©2020</Copyright>
+    <PackageProjectUrl>https://github.com/debitexpress-business/image-assist</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/debitexpress-business/image-assist</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>image netcore c#</PackageTags>
   </PropertyGroup>
-
+  
 </Project>
