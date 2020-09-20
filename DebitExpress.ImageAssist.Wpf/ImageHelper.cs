@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace DebitExpress.ImageAssist.Wpf
@@ -29,6 +30,16 @@ namespace DebitExpress.ImageAssist.Wpf
             bitmapImage.Freeze();
 
             return bitmapImage;
+        }
+
+        /// <summary>
+        /// Convert byte array to Image
+        /// </summary>
+        /// <param name="imageArray"></param>
+        /// <returns></returns>
+        public static Task<BitmapImage> ToImageAsync(this byte[] imageArray)
+        {
+            return Task.Factory.StartNew(() => ToImage(imageArray));
         }
 
         /// <summary>
