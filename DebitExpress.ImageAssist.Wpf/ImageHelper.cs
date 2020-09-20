@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace DebitExpress.ImageAssist.Wpf
@@ -29,6 +30,16 @@ namespace DebitExpress.ImageAssist.Wpf
             bitmapImage.Freeze();
 
             return bitmapImage;
+        }
+
+        /// <summary>
+        /// Convert byte array to Image
+        /// </summary>
+        /// <param name="imageArray"></param>
+        /// <returns></returns>
+        public static Task<BitmapImage> ToImageAsync(this byte[] imageArray)
+        {
+            return Task.Factory.StartNew(() => ToImage(imageArray));
         }
 
         /// <summary>
@@ -124,12 +135,35 @@ namespace DebitExpress.ImageAssist.Wpf
         {
             using var encParams = new EncoderParameters(1)
             {
-                Param = { [0] = new EncoderParameter(Encoder.Quality, (long)100) }
+                Param =
+                {
+                    [0] = new EncoderParameter(Encoder.Quality, (long)100)
+                }
             };
 
             using var ms = new MemoryStream();
-            bitmap?.Save(ms, jpgInfo, encParams);
-            return ms.ToArray();
+            {
+                bitmap?.Save(ms, jpgInfo, encParams);
+                return ms.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Convert image to byte array with the smallest size based on the <see cref="maxWidth"/> and <see cref="maxHeight"/>
+        /// </summary>
+        /// <param name="image">
+        /// The image to be converted
+        /// </param>
+        /// <param name="maxWidth">
+        /// Crop from center to the maximum width
+        /// </param>
+        /// <param name="maxHeight">
+        /// Crop from center to the maximum height
+        /// </param>
+        /// <returns></returns>
+        public static Task<byte[]> ToByteArrayAsync(this Image image, int maxWidth, int maxHeight)
+        {
+            return Task.Factory.StartNew(() => ToByteArray(image, maxWidth, maxHeight));
         }
         
         /// <summary>
@@ -144,6 +178,16 @@ namespace DebitExpress.ImageAssist.Wpf
             {
                 return Image.FromStream(stream);
             }
+        }
+
+        /// <summary>
+        /// Creates an <see cref="Image"/> from the specified file.
+        /// </summary>
+        /// <param name="imagePath"></param>
+        /// <returns></returns>
+        public static Task<Image> FromFileAsync(string imagePath)
+        {
+            return Task.Factory.StartNew(() => FromFile(imagePath));
         }
     }
 }
