@@ -124,12 +124,17 @@ namespace DebitExpress.ImageAssist.Wpf
         {
             using var encParams = new EncoderParameters(1)
             {
-                Param = { [0] = new EncoderParameter(Encoder.Quality, (long)100) }
+                Param =
+                {
+                    [0] = new EncoderParameter(Encoder.Quality, (long)100)
+                }
             };
 
             using var ms = new MemoryStream();
-            bitmap?.Save(ms, jpgInfo, encParams);
-            return ms.ToArray();
+            {
+                bitmap?.Save(ms, jpgInfo, encParams);
+                return ms.ToArray();
+            }
         }
         
         /// <summary>
