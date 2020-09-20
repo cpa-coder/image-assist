@@ -147,6 +147,24 @@ namespace DebitExpress.ImageAssist.Wpf
                 return ms.ToArray();
             }
         }
+
+        /// <summary>
+        /// Convert image to byte array with the smallest size based on the <see cref="maxWidth"/> and <see cref="maxHeight"/>
+        /// </summary>
+        /// <param name="image">
+        /// The image to be converted
+        /// </param>
+        /// <param name="maxWidth">
+        /// Crop from center to the maximum width
+        /// </param>
+        /// <param name="maxHeight">
+        /// Crop from center to the maximum height
+        /// </param>
+        /// <returns></returns>
+        public static Task<byte[]> ToByteArrayAsync(this Image image, int maxWidth, int maxHeight)
+        {
+            return Task.Factory.StartNew(() => ToByteArray(image, maxWidth, maxHeight));
+        }
         
         /// <summary>
         /// Creates an <see cref="Image"/> from the specified file.
