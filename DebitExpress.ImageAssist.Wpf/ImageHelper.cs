@@ -179,5 +179,15 @@ namespace DebitExpress.ImageAssist.Wpf
                 return Image.FromStream(stream);
             }
         }
+
+        /// <summary>
+        /// Creates an <see cref="Image"/> from the specified file.
+        /// </summary>
+        /// <param name="imagePath"></param>
+        /// <returns></returns>
+        public static Task<Image> FromFileAsync(string imagePath)
+        {
+            return Task.Factory.StartNew(() => FromFile(imagePath));
+        }
     }
 }
