@@ -18,18 +18,26 @@ namespace DebitExpress.ImageAssist.Wpf
         /// <returns></returns>
         public static BitmapImage ToImage(this byte[] imageArray)
         {
-            if (imageArray == null) return null;
+            try
+            {
+                if (imageArray == null) return null;
 
-            using var stream = new MemoryStream(imageArray);
+                using var stream = new MemoryStream(imageArray);
 
-            var bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.StreamSource = stream;
-            bitmapImage.EndInit();
-            bitmapImage.Freeze();
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
 
-            return bitmapImage;
+                return bitmapImage;
+            }
+            catch (NotSupportedException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
         }
 
         /// <summary>
